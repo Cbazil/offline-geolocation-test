@@ -12,6 +12,29 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  data() {
+    return {
+       options: {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      }
+    }
+  },
+  methods: {
+    success (pos) {
+      let coords = pos.coords;
+      console.log("Lat: ", coords.latitude)
+      console.log("Long: ", coords.longitude)
+      console.log("Range: (m) ", coords.accuracy)
+    },
+    error (err) {
+      console.warn(err.message)
+    }
+  },
+  created() {
+    navigator.geolocation.getCurrentPosition(this.success,this.error,this.options)
   }
 }
 </script>

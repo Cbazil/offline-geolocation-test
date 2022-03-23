@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h2>{{ lat }}</h2>
+    <h2>{{ long }}</h2>
+    <h2>{{ accu }}</h2>
   </div>
 </template>
 
@@ -15,6 +17,9 @@ export default {
   },
   data() {
     return {
+      lat: 0,
+      long: 0,
+      accu: 0,
        options: {
         enableHighAccuracy: true,
         timeout: 5000,
@@ -25,9 +30,9 @@ export default {
   methods: {
     success (pos) {
       let coords = pos.coords;
-      console.log("Lat: ", coords.latitude)
-      console.log("Long: ", coords.longitude)
-      console.log("Range: (m) ", coords.accuracy)
+      this.lat = coords.latitude;
+      this.long = coords.longitude;
+      this.accu = coords.accuracy;
     },
     error (err) {
       console.warn(err.message)
